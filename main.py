@@ -76,7 +76,7 @@ MAIN_DIR = str(Path.home()) + '\\Pictures\\Reddit Crawler'
 if not os.path.isdir(MAIN_DIR):
     os.mkdir(MAIN_DIR)
 
-#Creating reddit session
+# Creating reddit session
 user_agent = 'Reddit Crawler 1.2 by /u/Gordramus'
 reddit = praw.Reddit('bot1', user_agent=user_agent)
 
@@ -101,14 +101,14 @@ while True:
                         break
                     if not os.path.isdir(sub_folder):
                         os.mkdir(sub_folder)
-                    print(post.title)
+                    print('[POST] ' + post.title)
                     url = str(post.url)
                     if url.endswith('jpg') or url.endswith('jpeg') or url.endswith('png'):
                         title = remove_illegal(post.title[:12])
                         filename = createFileName(sub_folder, url, title)
                         if not os.path.exists(filename):
-                            print(url)
-                            print(filename)
+                            print('[URL] ' + url)
+                            print('[FILE] ' + filename)
                             try:
                                 urllib.request.urlretrieve(url, filename)
                             except:
@@ -116,7 +116,7 @@ while True:
                             else:
                                 img_count += 1
                         else:
-                            print(filename + " already exists! Skipping OwO")
+                            print('[SKIP] ' + filename + " already exists! Skipping OwO")
             except:
                 req_count = naptime(2)
 
